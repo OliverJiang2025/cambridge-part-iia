@@ -1,0 +1,224 @@
+\documentclass[11pt]{article}[times]
+
+\topmargin 0.0cm 
+\oddsidemargin 0.0in 
+\evensidemargin0.0in
+\textheight 22cm 
+\textwidth  17cm 
+\headheight 0in 
+\headsep 0in
+\parindent0in
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{./Figures/}}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{circuitikz}
+\usepackage{setspace}
+\usepackage{pdfpages}
+\begin{document}
+
+
+\section*{Experiment 1: C-V Measurements}
+\begin{figure}[htbp]
+  \includegraphics[width=0.8\textwidth]{Figure_1.png} 
+  \centering
+  \caption{Circuit Diagram for CV Measurements} 
+  \label{fig:fig1} 
+\end{figure}
+The circuits shown in Figure \ref{fig:fig1}
+is used to conduct the CV Measurements.
+
+The open-loop frequency of the oscillator 
+$f_0 = 1629.9 \pm 0.05 \text{kHz}$.
+
+The "10 pF" capacitor $C_{10} = 10.48 \pm 0.005 pF$.
+
+With $C_{10}$ connected, the frequency $f_{10} = 1467.4 \pm 0.05 \text{kHz}$.
+
+From theories of oscillators, 
+the circuit capacitance 
+$C_0 = \frac{C_{10}}{\big(\frac{f_0^2}{f_{10}^2}\big)-1} = 44.84 \pm 0.054 \text{pF}$.
+The error $\Delta C_0$ is found by:
+$\Delta C_0 \approx |\frac{\partial C_{0}}{\partial C_{10}}| \Delta C_{10} + |\frac{\partial C_{0}}{\partial C_{0}}| \Delta f_{0} + |\frac{\partial C_{0}}{\partial f_{10}}| \Delta f_{10}$.
+
+In this experiment, the total 
+capacitance $C_r$ is consisted of the
+stray capacitance $C_s$, and capacitance
+of the depletion region $C_{diode}$:
+$C_r = C_s + C_{diode}$.
+
+Where $C_s$ is constant and 
+$C_{diode} = A_c (\frac{\epsilon_s e N_d}{2(V_o-V_{rev})})^{1/2}$,
+$V_o = 0.5V$ is the built-in voltage. 
+
+The bias voltage $V_{rev}$ is varied in a 
+range and corresponding $C_r$ is found from 
+$C_r = C_0[(\frac{f_0}{f_r})^2-1]$, where 
+$f_r$ is the frequency measured on the frequency 
+meter. 
+
+The data table is shown in Figure \ref{tab:tab1} in 
+appendix. 
+
+To extrapolate $C_s$ and $N_D$ from the data, 
+a scatter plot and a linear fit are applied, 
+where $C_r$ is plotted against $(V_0 - V_{ref})^{-1/2}$.
+
+Rearrangements gives: $C_r = C_s + [A_d (\frac{\epsilon_s eN_D}{2})^{1/2}] \cdot (V_0 - V_{ref})^{-1/2}$.
+
+For the linear fit $y = kx + b$, $C_s = b$
+and $N_D = \frac{2}{\epsilon_s e}(\frac{k}{A_c})^2 $.
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.5\textwidth]{Figure_2.png} 
+  \centering
+  \caption{Linear Fit of the CV Measurements} 
+  \label{fig:fig2} 
+\end{figure}
+
+With k = 6.2615, b = 2.4309, 
+$C_s = 2.4309 pF$, $N_D = 8.2 \times 10^{26} m^{-3}$.
+
+\section*{Experiment 2: I-V Measurements}
+
+\subsection*{Reverse Bias}
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.5\textwidth]{Figure_3.png} 
+  \centering
+  \caption{Circuit Diagram of Measuring Reverse Saturation Current} 
+  \label{fig:fig3} 
+\end{figure}
+
+Figure \ref{fig:fig3} shows the circuits diagram 
+for measuring reverse saturation current under
+reverse bias. 
+
+The reverse current $I_{rev}$ is related to 
+reverse saturation current $I_{s}$ and 
+leak resistance $R_{leak}$ by:
+$I_{rev} = I_s [\exp{\frac{eV_{rev}}{\eta kT}}-1] + \frac{V_{rev}}{R_{leak}}$
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.5\textwidth]{Figure_5.png} 
+  \centering
+  \caption{Linear Fit for Current - Voltage Measurements} 
+  \label{fig:fig5} 
+\end{figure}
+
+Figure \ref{fig:fig5} shows a linear fit of
+measured values of $I_{rev} - V_{rev}$.
+
+The reverse saturation current can be estimated
+by the intercept as $I_{rev} \approx - I_s$
+when $V_{rev} = 0$. $I_s \approx 0.1594 \mu A$.
+
+The leak resistance can be estimated by the gradient.
+$R_{leak} \approx 59.2 k\Omega $.
+
+
+\subsection*{Weak Forward Bias} 
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.5\textwidth]{Figure_4.png} 
+  \centering
+  \caption{Circuit Diagram of Measuring Forward Current}
+  \label{fig:fig4} 
+\end{figure}
+
+Figure \ref{fig:fig4} shows the circuits diagram 
+for measuring current under
+both weak forward bias and strong 
+forward bias. 
+
+For a Schotkky barrier diode under forward bias, 
+$I_F = I_s [\exp{\frac{eV}{\eta kT}}-1]$.
+Rearrangement gives 
+$V_F = \eta \frac{kT}{e}[\ln(\frac{I_F}{I_s})+1]$.
+
+$V_F$ is plotted against $(\ln(\frac{I_F}{I_s})+1)$,
+shown in Figure \ref{fig:fig6}. The gradient 
+equals to $\eta \frac{kT}{e}$. Under the 
+lab circumstance, $\frac{kT}{e} = 25.68mV$.
+$\eta = 1.47$.
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.6\textwidth]{Figure_6.png} 
+  \centering
+  \caption{Linear Fit of Forward Voltage and $\ln(\frac{I_F}{I_s})+1$}
+  \label{fig:fig6} 
+\end{figure}
+
+\subsection*{Strong Forward Bias}
+In this section, a same circuit is used 
+as the test in weak forward bias. 
+
+From the lab sheet, 
+$I_F = \frac{1}{r_c} (V_F - \frac{\eta kT}{e}\ln(\frac{I_F}{I_s}))$.
+
+
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.6\textwidth]{Figure_7.png} 
+  \centering
+  \caption{Linear Fit of Forward Voltage and Forward Current}
+  \label{fig:fig7} 
+\end{figure}
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.6\textwidth]{Figure_8.png} 
+  \centering
+  \caption{Linear Fit of Forward Voltage and Forward Current}
+  \label{fig:fig8} 
+\end{figure}
+
+$r_{cSBD} = 2.5 \Omega$, $r_{cpn} = 0.9 \Omega$.
+
+
+
+\appendix
+
+\section*{Data Tables}
+
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.8\textwidth]{Table_1.png} 
+  \centering
+  \caption{Data Table for CV Measurements} 
+  \label{tab:tab1} 
+\end{figure}
+
+
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.8\textwidth]{Table_2.png} 
+  \centering
+  \caption{Data Table for Reverse Saturation Current} 
+  \label{tab:tab2} 
+\end{figure}
+
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.8\textwidth]{Table_2.png} 
+  \centering
+  \caption{Data Table for Weak Forward Bias} 
+  \label{tab:tab3} 
+\end{figure}
+
+\begin{figure}[htbp]
+  \includegraphics[width=0.8\textwidth]{Table_4.png} 
+  \centering
+  \caption{Data Table for Strong Forward Bias} 
+  \label{tab:tab4} 
+\end{figure}
+
+
+
+
+
+\end{document}
