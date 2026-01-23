@@ -1,0 +1,360 @@
+\documentclass[12pt]{article}
+\textwidth 15.5cm \oddsidemargin 0cm \topmargin -1cm \textheight
+24cm \footskip 1.5cm \usepackage{epsfig}
+\usepackage{amsmath,graphicx,psfrag,pstcol}
+\usepackage{hyperref}
+\def\n{\noindent}
+\def\u{\underline}
+\def\hs{\hspace}
+\usepackage{graphicx}
+\graphicspath{{../Figures/}}
+\newcommand{\thrfor}{.^{\displaystyle .} .}
+\newcommand{\bvec}[1]{{\bf #1}}
+\usepackage{listings} % 核心宏包：代码插入
+\usepackage{xcolor}
+
+\begin{document}
+
+\noindent
+\rule{15.7cm}{0.5mm}
+
+
+\begin{center}
+{\bf ENGINEERING TRIPOS PART IIA}
+\end{center}
+\vspace{0.5cm} {\bf EIETL \hfill MODULE EXPERIMENT 3F3}
+\vspace{0.5cm}
+\begin{center}
+{\bf RANDOM VARIABLES and RANDOM NUMBER GENERATION\\
+Short  Report\\\hfill \\
+Name: Yongqing Jiang\\\hfill\\
+College: Peterhouse\\\hfill\\
+crsid: yj375
+}
+\end{center}
+\rule{15.7cm}{0.5mm}
+
+\vspace*{1cm}
+
+\begin{enumerate}
+\item {\MakeUppercase{\textbf{Uniform and normal random variables.}}}
+
+{\bf Histogram of Gaussian random numbers
+overlaid on exact Gaussian curve (scaled):}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_1.png}   
+\end{figure}
+
+\newpage
+
+{\bf Histogram of Uniform random numbers overlaid 
+on exact Uniform curve (scaled):}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_2.png}   
+\end{figure}
+
+
+
+{\bf Kernel density estimate for Gaussian 
+random numbers overlaid on exact Gaussian curve:}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_3.png}   
+\end{figure}
+
+
+{\bf Kernel density estimate for Uniform random 
+numbers overlaid on exact Gaussian curve:}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_4.png}   
+\end{figure}
+
+\newpage
+
+{\bf Comment on the advantages and disadvantages of the kernel density 
+method compared with the histogram method for 
+estimation of a probability density from random samples:}
+
+
+According to the plots, kernel smoothing
+function works well with Gaussian random numbers. It is
+very close to the exact Gaussian curve. However, it does not
+perform well when it comes to uniform random numbers.
+We can see that the smoothing function of uniform random
+numbers is close to a Gaussian curve. This is due to large 
+value of width applied in the kernel smoothing function.
+A large value of width underfits the random numbers and makes
+the smoothing function similar to the kernel function itself,
+which is a standard Gaussian distribution in this context.
+
+If the width is set to smaller values, for example, 0.1 as 
+shown below. 
+The smoothing function provides a good approximation to the 
+expected probability density function, which is a constant from
+0 to 1. But it overfits the data, the density curve is no longer
+a constant value as expected. It can be seen that fine-tuning
+on the width is much harder for uniform random numbers.
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=0.7\textwidth]{Figure_10.png}   
+\end{figure}
+
+To sum up, kernel density method works well with Gaussian 
+random numbers, and becomes harder to fine-tune the parameter
+to fit uniform random numbers.
+
+{\bf Theoretical mean and standard deviation 
+calculation for uniform density as a function of $N$:}
+
+Suppose a set of N independent random samples are taken
+from a uniform distribution:
+
+\begin{equation*}
+    x^{(i)}  \sim p_U(x) = \frac{1}{N}, i = 1,...,N
+\end{equation*}
+The probability that a sample $x^{(j)}$ lies within
+a particular bin of the histogram is:
+\begin{equation*}
+    p_j = \int^{c_j + \delta/2}_{c_j-\delta/2} p(x) dx = \frac{\delta}{N}
+\end{equation*}
+in which $\delta$ represents the size of a bin.
+\newline
+Thus, the mean of the count data in bin $j$ is 
+$Np_j = \delta$.
+The variance is $Np_j(1-p_j) = \delta (1-\frac{\delta}{N})$
+
+
+
+{\bf Explain behaviour as $N$ becomes large:}
+Assuming a constant bin size, it is clear that
+the mean is not affected by N, and the variance
+decreases as N increases.
+
+
+{\bf Plot of histograms for $N=100$,  
+$N=1000$ and $N=10000$ with theoretical mean  
+and $\pm 3$ standard deviation lines:}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_5.png}   
+\end{figure}
+
+
+{\bf Are your histogram results consistent 
+with the multinomial distribution theory? }
+\newline
+For the case that N = 1000 and 10000, the histogram results
+are consistent with the multinomial distribution theory.
+Considering the counts of each bin as a random variable, 
+its distribution approaches to Gaussian distribution 
+as $N \rightarrow \infty$
+according to Central Limit Theorem.
+\newline
+For a Gaussian distribution, 99\% of random variable lies within
+the interval $(\mu - 3\sigma, \mu+3\sigma)$. From the plots that
+N = 1000 and N = 10000, we can see that it is true.
+\newline
+However, the plot of N = 100 gives a negative value of $\mu - 3\sigma$.
+Since $\sigma^2 = \delta(1-\frac{\delta}{N})$, a small N gives a 
+large $\sigma$. This implies that histogram estimatio is not
+suitable for a set of random numbers with a small size.
+
+
+
+\item \MakeUppercase{{\textbf{Functions of random variables}}}
+
+{\bf For normally distributed ${\cal N}(x|0,1)$ 
+random variables, take $y=f(x)=ax+b$. 
+Calculate $p(y)$ using the Jacobian formula:}
+
+The Jacobian formula provided by lab handout:
+\begin{equation*}
+    p(y) = \frac{p(x)}{|dy/dx|}\bigg|_{x = f^{-1}(y)}
+\end{equation*}
+$y = f(x) = ax + b \Rightarrow x = f^{-1}(y) = \frac{y-b}{a}$, and 
+$dy/dx = a$.
+With the standard Gaussian distribution:
+\begin{equation*}
+    p(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}
+\end{equation*}
+
+\begin{equation*}
+    p(y) = \frac{1}{|a|} \cdot \frac{1}{\sqrt{2\pi}} e^{-\frac{(\frac{y-b}{a})^2}{2}} = \frac{1}{\sqrt{2\pi a^2}} e^{-\frac{(y-b)^2}{2a^2}}
+\end{equation*}
+
+
+{\bf Explain how this is linked to the general normal 
+density with non-zero mean and non-unity variance:}
+\newline
+For a general normal distribution ${\cal N}(x|\mu,\sigma^2)$,
+the probability density function is:
+\begin{equation*}
+    p(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+\end{equation*}
+We can see that the transformed random variable is ${\cal N}(y|b,a^2)$.
+
+
+{\bf Verify this formula by transforming a large collection of 
+random samples $x^{(i)}$ to give $y^{(i)}=f(x^{(i)})$, 
+histogramming the resulting $y$ samples, and overlaying a 
+plot of your formula calculated using the Jacobian:}
+
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_6.png}   
+\end{figure}
+
+We can see that the histogram of transformed random samples with
+a = 6 and b = 3 fits well with the probability density function with
+variance 6 and mean 3.
+
+
+
+{\bf Now take $p(x)={\cal N}(x|0,1)$ and $f(x)=x^2$. 
+Calculate $p(y)$ using the Jacobian formula:}
+
+Note that $y = f(x) = x^2 \Rightarrow x = f^{-1}(y) = \pm \sqrt{y}$.
+ Thus, $dy/dx = 2x = 2\pm \sqrt{y}$.
+The probability density function of the transformed random variable is:
+\begin{align*}
+    p(y) &= \frac{p(x)}{|dy/dx|}\bigg|_{x = f^{-1}(y)} + \frac{p(x)}{|dy/dx|}\bigg|_{x = -f^{-1}(y)} \\
+    &= \frac{1}{2\sqrt{y}} \cdot \frac{1}{\sqrt{2\pi}} e^{-\frac{(\sqrt{y})^2}{2}} + \frac{1}{2\sqrt{y}} \cdot \frac{1}{\sqrt{2\pi}} e^{-\frac{(-\sqrt{y})^2}{2}} \\
+    &= \frac{1}{\sqrt{2\pi y}} e^{-\frac{y}{2}}
+\end{align*}
+
+
+
+{\bf Verify your result by histogramming of transformed random samples:}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=0.7\textwidth]{Figure_7.png}
+
+\end{figure}
+
+
+\item{\MakeUppercase{\textbf{Inverse CDF method}}}
+
+
+
+{\bf Calculate the CDF and the inverse CDF for the exponential distribution: }
+
+The probability density function
+of an exponential distribution Y with mean 1 is:
+\begin{equation*}
+    f_Y(y) = e^{-y} 
+\end{equation*}
+The corresponding cdf is found by integration:
+\begin{equation*}
+    F_Y(y) = \int_{0}^{y} f_Y(t)dt = \int_0^y e^{-t}dt = 1 - e^{-y}
+\end{equation*}
+The inverse of this function is found by: $x = F_Y(y), y = F^{-1}_Y(x)$.
+\begin{equation*}
+    F^{-1}_Y(x) = -\ln{(1-x)} 
+\end{equation*}
+
+{\bf Matlab/Python code for inverse CDF method for 
+generating samples from the exponential distribution:}
+
+
+\begin{lstlisting}[language=python, caption={PYTHON CODE}]
+x_data = np.random.uniform(0,1,1000)
+y_data = -np.log(1-x_data)
+
+y = np.linspace(0,5,1000)
+exp_theoretical = np.e**(-y)
+\end{lstlisting}
+
+
+
+{\bf Plot histograms/ kernel density estimates and overlay 
+them on the desired exponential density:}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_8.png}
+\end{figure}
+
+
+
+\item {\MakeUppercase{\bf Simulation from a `non-standard'  density.}}
+
+{\bf Matlab/Python code to generate $N$ random numbers drawn 
+from the distribution of $X$:}
+
+
+\begin{lstlisting}[language=python, caption={PYTHON CODE}]
+    def generate_x(alpha, beta, N):
+        def b(alpha, beta):
+            temp1 = beta*np.tan(np.pi*alpha/2)
+            temp2 = np.arctan(temp1)
+            return temp2/alpha
+
+        def s(alpha, beta):
+            temp1 = beta*np.tan(np.pi*alpha/2)
+            temp2 = 1 + temp1**2
+            temp3 = 1/(2*alpha)
+            return temp2**(temp3)
+
+        u = np.random.uniform(-np.pi/2,np.pi/2,N)
+
+        v = -np.log(1-np.random.uniform(0,1,N))
+
+        b = b(alpha, beta)
+        s = s(alpha, beta)
+
+        def x(b,s,u,v):
+            temp1 = np.sin(alpha*(u + b))
+            temp2 = (np.cos(u))**(1/alpha)
+            temp3 = np.cos(u - alpha*(u + b))/v
+            temp4 = (1-alpha)/alpha
+            return s*temp1/temp2*(temp3**temp4)
+        return x(b,s,u,v)
+
+\end{lstlisting}
+
+{\bf Plot some histogram density estimates with $\alpha=0.5,\,1.5$ 
+and several values of $\beta$. }
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=1\textwidth]{Figure_9.png}
+\end{figure}
+
+
+{\bf Hence comment on the interpretation 
+of the parameters $\alpha$ and $\beta$.}
+\newline
+From the figures, we can see that $\alpha$ determines the extent of the 
+data with extreme values. A small value of $\alpha$ gives a distribution
+that has more extreme values, while a large value of $\alpha$ gives a distribution
+that is more concentrated around the mean. When $\alpha = 2$, we can see that
+the distribution has become a standard Gaussian distribution.
+\newline
+The value of $\beta$ determines the skewness of the distribution.
+A positive $\beta$ skews the distributio to the right, and a 
+negative $\beta$ skews the distribution to the left.
+\end{enumerate}
+
+\appendix
+
+\section{Link to worked files}
+
+The worked python files are uploaded to a 
+repository which can be found at:
+\url{https://github.com/OliverJiang2025/3F3_lab.git}
+
+
+
+
+\end{document}
+
