@@ -1,0 +1,417 @@
+\documentclass{article}
+
+\topmargin 0.0cm 
+\oddsidemargin 0.0in 
+\evensidemargin0.0in
+\textheight 22cm 
+\textwidth  17cm 
+\headheight 0in 
+\headsep 0in
+\parindent0in
+
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{../Figures/}}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{circuitikz}
+\usepackage{setspace}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\doublespacing{}
+\usepackage{wrapfig}
+\begin{document}
+
+%\hspace{1cm}
+
+\begin{center}
+\Large{\bf CAMBRIDGE UNIVERSITY ENGINEERING DEPARTMENT}
+\end{center}
+
+\vskip 1cm
+
+\begin{center}
+\large{\bf Part IIA Full Technical Report}
+\end{center}
+
+\vskip 1cm
+\begin{center}
+\fbox{\rule[0.0cm]{0cm}{1.0cm}
+ \large{\bf 3F1 Flight Control}\rule[-0.75cm]{0cm}{1.0cm} }
+\end{center}
+
+
+\vskip 2cm
+
+\begin{center}
+
+Name: Yongqing Jiang \\
+\vskip 0.2cm
+CRSid: yj375
+\vskip 0.2cm
+ College: Peterhouse \\
+  \vskip 0.2cm
+
+%
+Date of Experiment: Oct. 2025
+%
+\end{center}
+
+\vskip 2cm
+
+\section{Introduction}
+Flight control systems are the backbone of modern aviation technology, which allows 
+the aircraft to maintain stability and respond to both pilot input and environmental 
+disturbances during operation. In this lab activity, Jupyter notebook is leveraged to explore, simulate, and analyze key concepts in control theory in the context of flight control. Manual control and autopilot techniques are discussed with experimental results here. Additionally, this report discusses control of discrete systems as it would be in real world under digital control.
+\newpage
+
+\section{Method and Results}
+To investigate flight control, this lab activity leverages Jupyter Notebook\cite{cued} as the primary computational environment, followed by files that include encapsulated functions to maintain the simplicity and readability of the main file. The link to an online repository of the files can be found in the Appendices. The main steps are following the instructions given in \texttt{3F1\_lab.ipynb}.
+\newline
+There are four parts in \texttt{3F1\_lab.ipynb}. The first part includes an introduction to the lab and preparatory knowledge for manipulating control theory in python. The second part investigates the response of aircraft under manual control, while the third part discusses autopilot powered by PID control. The last part explores the content under discrete circumstances instead of the continuous regime used in the previous parts.
+The lab characterizes flight control in a classic control theory flow diagram as shown in Figure \ref{fig:flowdiagram}. 
+
+\begin{wrapfigure}{r}{0.6\textwidth} 
+  \vspace{-10pt} 
+  \centering
+  \includegraphics[width=\linewidth, keepaspectratio]{flowdiagram.png}
+  \caption{Flow diagram}
+  \label{fig:flowdiagram}
+  \vspace{-5pt}  
+\end{wrapfigure}
+
+In which the plant symbolizes the dynamics of the aircraft, with transfer function $G(s) = \frac{\bar{y}(s)}{\bar{x}(s)}$. $d(t)$ characterizes external disturbances that are potential threats of maintaining stability. The controller takes the form of manual control and autopilot in this lab, which are both described by a transfer function $K(s) = \frac{\bar{u}(s)}{\bar{e}(s)}$. The final goal of this control system is to control the output $y(t)$ to the reference signal $r(t)$ in a behavior that is optimal to the aircraft operation. The following parts will show the methods used in the lab to explore behaviors of this control systems under different context.
+
+\subsection{Manual Control}
+
+\subsubsection{Response to Simple Disturbances}
+
+To start with, a simplified aircraft model is parameterized by M and N, which are both describing aerodynamical properties of the aircraft:
+\begin{equation}
+    \ddot y(t) + M \dot y(t) = Nx(t)
+\end{equation}
+In the lab, it is set that $M = N =10$. By Laplace Transform, the transfer function is:
+\begin{equation}
+    G(s) = \frac{\bar{y}(s)}{\bar{x}(s)} = \frac{10}{s^2 + 10s}
+\end{equation}
+The manual control is simplified to be constructed with a proportional gain $k$ in series with a pure time delay $D$. By control theory, this transfer function is:
+\begin{equation}
+    K(s) =\frac{\bar{u}(s)}{\bar{e}(s)}=ke^{Ds}
+\end{equation}
+To find the value of $k$ and $D$ for a specific user who controls the aircraft, a simple experiment is conducted with an impulse disturbance of magnitude 5. As shown by Figure \ref{fig:fig1}, the blue line indicates the error signal $e(t)$, and the orange line represents the output of the controller, $u(t)$.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure1.png} 
+        \caption{Time domain response}
+        \label{fig:fig1}
+    \end{subfigure}
+    \hfill  
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure2.png}
+        \caption{Bode Diagram}
+        \label{fig:fig2}
+    \end{subfigure}
+    
+    \caption{Time domain response and Bode Diagram of Manual Controller}  
+    \label{fig:t1}
+\end{figure}
+
+\begin{wrapfigure}{r}{0.4\textwidth} 
+  \vspace{-25pt} 
+  \centering
+  \includegraphics[width=\linewidth, keepaspectratio]{Figure3.png}
+  \caption{Step response of manual control}
+  \label{fig:fig3}
+  \vspace{-10pt}  
+\end{wrapfigure}
+
+In time domain, the output of controller $u(t) = ke(t-D)$ is used to convey the idea of a proportional gain and a pure time delay. $k$ can be found by measuring the peak value of the signals and find the ratio of the two values. $D$ can be considered as the reaction time of human, which can be measured by the difference in time of the rising edges of the two signals. 
+As shown, $k$ is measured to be 1.56 and $D$ is measured to be 0.57s.
+After that, a Bode diagram of $K(s)G(s)$ is plotted in the Jupyter Notebook as shown in Figure \ref{fig:fig2}.
+
+After that, a step disturbance was applied to the aircraft. The response is shown in Figure \ref{fig:fig3}. 
+
+\subsubsection{Pilot Induced Oscillation}
+Now the aircraft has a poorly-designed control system with transfer function:
+\begin{equation}
+    G_1(s) = \frac{c}{(Ts+1)^3}
+\end{equation}
+The parameters are chosen as: $T = \frac{4D}{\pi}, c = \frac{\sqrt{8}}{k}$, in which $k = 1.56, D = 0.57$ as measured perviously. An impulse disturbance of magnitude $5kD$ is applied and the response is shown by Figure \ref{fig:fig4}. For comparison, Figure \ref{fig:fig5} is the response without the controller.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}  
+        \centering
+        \includegraphics[width=\textwidth]{Figure4.png} 
+        \caption{Response with controller}
+        \label{fig:fig4}  
+    \end{subfigure}
+    \hfill  
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure5.png}
+        \caption{Response without controller}
+        \label{fig:fig5}
+    \end{subfigure}
+    
+    \vspace{8pt} 
+    
+  
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure6.png}
+        \caption{Bode Diagram}
+        \label{fig:fig6}
+    \end{subfigure}
+    
+    \caption{Responses of aircraft with $G_1(s)$} 
+    \label{fig:t1}  
+\end{figure}
+
+The Bode Diagram of $K(s)G_1(s)$ is plotted to reveal more information about $G_1(s)$, and it is shown in Figure \ref{fig:fig6}.
+\newpage
+\subsubsection{Sinusoidal Disturbances}
+In this section, a sinusoidal disturbance is applied to the F4E Fighter aircraft. The response to a manual control is shown in Figure \ref{fig:fig7}. To make a comparison, Figure \ref{fig:fig8} shows the response with no control.
+
+The Bode Diagram of the simplified manual controller and the plant is plotted at Figure \ref{fig:fig9}. Lastly, the response with manual control of very small amplitude is shown in Figure \ref{fig:fig10}.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}  
+        \centering
+        \includegraphics[width=\textwidth]{Figure7.png} 
+        \caption{Response with controller}
+        \label{fig:fig7}  
+    \end{subfigure}
+    \hfill  
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure8.png}
+        \caption{Response without controller}
+        \label{fig:fig8}
+    \end{subfigure}
+    
+    \vspace{8pt} 
+
+    \begin{subfigure}[b]{0.55\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure9.png}
+        \caption{Bode Diagram}
+        \label{fig:fig9}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure10.png}
+        \caption{Responses of very small control}
+        \label{fig:fig10}
+    \end{subfigure}
+    \caption{Responses with sinusoidal disturbance} 
+    \label{fig:t2}  
+\end{figure}
+
+
+
+\subsubsection{Unstable Aircraft}
+Now an unstable aircraft is considered with transfer function:
+\begin{equation}
+    G_2(s) = \frac{2}{sT-1}
+\end{equation}
+Figure \ref{fig:fig11} shows the response of the attempt on manual control of the unstable aircraft at T = 0.6s.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure11.png} 
+        \caption{Unstable aircraft}
+        \label{fig:fig11}
+    \end{subfigure}
+    \hfill  
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure12.png}
+        \caption{Proportional control at marginally stable}
+        \label{fig:fig12}
+    \end{subfigure} 
+    \caption{Responses of unstable and marginally stable aircraft}
+    \label{fig:t3}
+\end{figure}
+
+\subsection{Autopilot} 
+In this section, autopilot control is attempted. The model for a transport aircraft on approach to landing is considered here:
+\begin{equation}
+    G_3(s)=\frac{6.3s^2+4.3s+0.28}{s^5+11.2s^4+19.6s^3+16.2s^2+0.91s+0.27}
+\end{equation}
+\subsubsection{Proportional Controller}
+The autopilot control is firstly discovered by a simple proportional control:
+$u(t) = Ke(t)$. The boundary value of K is tested to be 16 here, and the corresponding response is on Figure \ref{fig:fig11}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure13.png} 
+        \caption{Unstable aircraft}
+        \label{fig:fig13}
+    \end{subfigure}
+    \hfill  
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure14.png}
+        \caption{Proportional control at marginally stable}
+        \label{fig:fig14}
+    \end{subfigure} 
+    \caption{Responses of unstable and marginally stable aircraft}
+    \label{fig:t4}
+\end{figure}
+
+\subsubsection{PID Controller}
+Now a PID controller is considered by this controller:
+\begin{equation*}
+    u(t) = K_p \left( e(t)+\frac{1}{T_i}\int^{t}_0e(\tau) d\tau + T_d \frac{de}{dt} \right)
+\end{equation*}
+By Ziegler-Nichols rules, the parameters are set to be: $K_p = 0.6K_c, T_i = 0.5T_c, T_d = 0.125T_c$. 
+Value of $T_d$ is increased by 40\% to reduce oscillation and the response is shown in Figure \ref{fig:fig13}.
+
+\subsubsection{Integrator Wind-up}
+
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=0.5\textwidth]{Figure15.png}  
+    \caption{Response at marginally stable}  
+    \label{fig:fig15}  
+\end{figure}
+
+
+\subsection{Discrete Systems}
+\begin{figure}[htbp] 
+    \centering  
+    \includegraphics[width=0.5\textwidth]{Figure_FTR_1.png}  
+    \caption{Response at marginally stable}  
+    \label{fig:ftr1}  
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure_FTR_2.png} 
+        \caption{Unstable aircraft}
+        \label{fig:ftr2}
+    \end{subfigure}
+    \hfill  
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figure_FTR_3.png}
+        \caption{Proportional control at marginally stable}
+        \label{fig:ftr3}
+    \end{subfigure} 
+    \caption{Responses of unstable and marginally stable aircraft}
+    \label{fig:t4}
+\end{figure}
+
+
+\section{Discussion} 
+
+\subsection{The stabilisation of Sinusoidal Disturbances}
+\subsection{Unstable Aircraft}
+\newpage
+\subsection{Broom Balancing}
+\subsection{PID Derivative Term Approximation}
+\subsection{Discretised Time Delays}
+\subsection{Discrete Systems}
+
+
+\section{Conclusion}
+
+
+\section{Appendices}
+\subsection{Lab Worksheet}
+\subsubsection{Simplified Aircraft Model}
+Transfer function = $\frac{10}{s^2+10s}$
+\newline
+num = [10], den = [1,10,0]
+\subsubsection{Modelling Manual Control}
+Controller transfer function = $ke^{-Ds}$
+\newline
+k = 1.56, D = 0.57
+\newline
+Phase margin = {30\degree}
+\newline
+Amount of extra time delay which can be tolerated = 0.338s
+\subsubsection{Pilot Induced Oscillation}
+Period of oscillation (observed) = 4.44s
+\newline
+Period of oscillation (theoretical) = 4.488s
+\subsubsection{Sinusoidal Disturbances}
+Maximum stabilising gain = 0.422
+\newline
+Gain at 0.66 Hz = 9dB   
+\newline
+Phase at 0.66 Hz = -240\degree
+\subsubsection{Unstable Aircraft}
+Fastest pole at T = 0.6s
+\subsubsection{Autopilot with Proportion Control}
+Proportional gain $K_C$ = 16
+Period of oscillation $T_C$ = 2s
+\subsubsection{Autopilot with PID Control}
+Transfer function of PID controller = $K_P(1+\frac{1}{sT_i}+sT_d)$
+\newline
+PID constants: $K_P$ = 9.6, $T_i$ = 1, $T_d$ = 0.25
+\newline
+Adjusted value of $T_d$ = 0.35
+\subsubsection{Integrator Wind-up}
+Integrator bound Q = 0.2
+\newpage
+\subsection{Lab Report}
+\subsubsection{(§2.2 Modelling Manual Control) Nyquist diagram (from Bode diagram) for
+controller in series with plant.}
+From Figure \ref{fig:fig2}, in which the upper graph is the magnitude plot while the lower graph is the phase plot. Information contained in this two plot are combined to give the shape of Nyquist Diagram of $K(j\omega)G(j\omega)$, which is given in Figure \ref{fig:nyq}.
+\begin{figure}[]  % 强制固定在当前位置
+    \centering  % 居中显示
+    % 图片宽度为文本宽度的70%，保持比例
+    \includegraphics[width=0.5\textwidth, keepaspectratio]{NyquistDiagram.jpg}
+    \caption{Nyquist Diagram of $K(j\omega)G(j\omega)$}  % 标题
+    \label{fig:nyq}  % 标签（用于引用）
+\end{figure}
+It is clear that the Nyquist Diagram behaves in a spiral shape approaching the origin point of the Argand Diagram. It is due to $e^{-j\omega D}$ term which rises an exponential decay of magnitude while keeping the curve "rotating" as 
+$\omega \to \infty$.
+Besides, it is worth noting that the Nyquist diagram does not encircle $(-1,j0)$ according to the magnitude plot in Figure \ref{fig:fig2}. By Nyquist Stability Criteria, this closed loop system is stable.
+
+
+\subsubsection{(§2.2 Modelling Manual Control) Are you using any integral action? Give a brief
+explanation. What does this imply about the accuracy of the model of the human
+controller?}
+Integral action was used.
+As shown by Figure \ref{fig:fig3}, it is clear that an integral action was used. Starting from around 4.7s, the orange $u(t)$ curve, which represents the manual control signal, maintains at around 5 to attempting to stabilize $e(t)$ to 0. This is an integral control because both the $e(t)$ and $\frac{de(t)}{dt}$ are zero afterwards. $u(t) = k_i \int e(t)dt$ for some $k_i$ here.
+
+
+\subsubsection{(§2.3 Pilot Induced Oscillation) Explain the oscillation of the feedback loop. How
+does your observed period of oscillation compare to the theoretical prediction?}
+\subsubsection{(§2.3 Pilot Induced Oscillation) Can you give a rough guideline to the control
+designer to make PIO less likely?}
+\subsubsection{(§2.4 Sinusoidal Disturbances) Was your manual input able to reduce the error
+(as compared to providing no input)?}
+\subsubsection{(§2.5 An Unstable Aircraft) Nyquist diagram for G2(s).}
+\subsubsection{(§2.5 An Unstable Aircraft) Explain, using the Nyquist criterion, why the feed-
+back system is stable with a proportional gain greater than 0.5.}
+\subsubsection{(§2.5 An Unstable Aircraft) Sketch of a Nyquist diagram for G2(s). with a small
+time delay D.}
+\subsubsection{(§3.4 Integrator Wind-up) Explain how you calculated the bound on Q.}
+\subsection{Worked Jupyter Notebook}
+This \href{https://github.com/OliverJiang2025/3F1_Lab_Flight_Control.git}{link} goes to the worked Jupyter Notebook finished on the lab session.
+\begin{thebibliography}{99}
+
+    \bibitem{cued} EIETL, CUED
+
+\end{thebibliography}
+\end{document}

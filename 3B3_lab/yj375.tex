@@ -1,0 +1,365 @@
+\documentclass[12pt]{article}
+
+\topmargin 0.0cm 
+\oddsidemargin 0.0in 
+\evensidemargin0.0in
+\textheight 22cm 
+\textwidth  17cm 
+\headheight 0in 
+\headsep 0in
+\parindent0in
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{./Figures/}}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{circuitikz}
+\usepackage{setspace}
+\usepackage{subcaption}
+\doublespacing
+\begin{document}
+
+%\hspace{1cm}
+
+\begin{center}
+\Large{\bf CAMBRIDGE UNIVERSITY ENGINEERING DEPARTMENT}
+\end{center}
+
+\vskip 0.5cm
+
+\begin{center}
+\large{\bf Part IIA Laboratory Report}
+\end{center}
+
+\vskip 0.5cm
+\begin{center}
+\fbox{\rule[0.0cm]{0cm}{1.0cm}
+ \large{\bf 3B3 DC-DC Converters}\rule[-0.75cm]{0cm}{1.0cm} }
+\end{center}
+
+\vskip 0.5cm
+
+\begin{center}
+
+Name: Yongqing Jiang \\
+\vskip 0.2cm
+CRSid: yj375  \\
+\vskip 0.2cm
+ College: Peterhouse \\
+\vskip 0.2cm
+
+Date of Experiment: Nov. 2025
+
+\end{center}
+
+\vskip 1cm
+
+
+\section*{Exercise 1: Diode Bridge AC-DC Rectifier}
+The scope readings for exercise 1 are shown by
+Figure \ref{fig:ex1}.
+\begin{figure}[htbp] 
+    \centering 
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure1-2.jpg} 
+        \caption{Reading of 1-2}
+        \label{fig:1-2}
+    \end{subfigure}
+    \hspace{2cm} 
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure1-3.jpg}
+        \caption{Reading of 1-3}
+        \label{subfig:1_3}
+    \end{subfigure}
+    \caption{Scope readings of Exercise 1}
+    \label{fig:ex1} 
+\end{figure}
+
+\section*{Exercise 2: DC-DC Buck Converter}
+The testing schematic of the DC-DC Buck Converter
+is shown by Figure \ref{fig:buck}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width = 1\linewidth]{Buck.jpg}
+    \caption{Schematic of DC-DC Buck Converter}
+    \label{fig:buck}
+\end{figure}
+
+The measurements are carried by four channels of
+the oscilliscope.
+\begin{enumerate}
+    \item CH1: Gate pulse voltage $v_G$
+    \item CH2: Diode voltage $v_D$
+    \item CH3: Output DC voltage $V_o$
+    \item CH4: Inductor current $i_L$
+\end{enumerate}
+Note that CH4 measures the current via a current probe and
+shows the reading in V on display.
+
+\begin{figure}[htbp] 
+    \centering 
+    \begin{subfigure}[t]{0.4\textwidth} % 子图宽度可适度扩大
+        \centering
+        \includegraphics[width=\linewidth]{Figure2-2-1.jpg} 
+        \caption{Reading with $V_o$ = 12V}
+        \label{fig:2-2-1}
+    \end{subfigure}
+    \hspace{2cm}
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure2-2-2.jpg}
+        \caption{Reading with $V_o$ = 18V}
+        \label{fig:2-2-2}
+    \end{subfigure}
+    \caption{Scope readings of section 2-2}
+    \label{fig:2-2}
+\end{figure}
+
+In Section 2-2, scope readings are taken with $V_o$ = 12V
+and $V_o$ = 18V. Duty ratio D = 0.45 for $V_o$ = 12V, 
+D = 0.68 for $V_o$ = 18V. 
+
+According to theory, the voltage 
+transfer ratio of a buck converter $M(D) = \frac{V_o}{V_d} = D$.
+So, the theoretical values of the two measurements should be
+$\frac{12}{30} = 0.4$ and $\frac{18}{20} = 0.6$ respectively.
+
+We can see that the measured duty ratios are about 10\% larger
+than the theoretical values for both cases. 
+This is due to non-ideal parts
+of circuits, mainly the extra voltage drop due to the diode 
+and the parasitic resistance of the inductor.
+
+Thus, for both ON and OFF states of the transistor,
+the DC output = $V_o - \Delta V$ is kept 
+constant actually. $V_o = DV_d$ should be larger than
+theoretical value of compensate this effect. As result,
+duty ratio is measured to be larger.
+
+In the next session, load resistor and
+inductors are explored by switching more inductors on. 
+The reading of scope
+is shown in Figure \ref{fig:2-3}.
+
+
+\begin{figure}[htbp] 
+    \centering 
+    \begin{subfigure}[t]{0.3\textwidth} % 子图宽度可适度扩大
+        \centering
+        \includegraphics[width=\linewidth]{Figure2-3-1.jpg} 
+        \caption{Reading with $L_3$ ON}
+        \label{fig:2-3-1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure2-3-2.jpg}
+        \caption{Reading with $L_3$ and $L_2$ ON}
+        \label{subfig:2-3-2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure2-3-3.jpg}
+        \caption{Reading with $L_3$, $L_2$, and $L_1$ ON}
+        \label{subfig:2-3-3}
+    \end{subfigure}
+    \caption{Scope readings of section 2-3}
+    \label{fig:2-3}
+\end{figure}
+To find the load resistance $R_L = \frac{V_o}{I_o}$, output
+current $I_o$ should be obtained from the readings of 
+CH4, which measures the inductor current $i_L$. By making
+the assumption that the output smoothing capacitor is large
+enough that all ripple current goes into the capacitor, 
+$I_o = i_{L\text{avg}}$. This average value can be obtained
+by the built-in measurements of the oscilliscope.
+
+From Figure \ref{fig:2-2-1} and \ref{fig:2-2-2}, we have 
+$I_o = 1.9285A$ for $V_o = 12V$ and $I_o = 5.3808A$ for $V_o = 18V$.
+Thus, the load resistances are calculated as $6.22 \Omega$ and $3.34 \Omega$
+for this two cases respectively. There is a huge discrepancy as expected. 
+Only one measurement is taken per case and the parasitic resistance is 
+not accounted for. We could improve this estimate of load resistance
+by taking multiple measurements and averaging them, or by considering 
+the parasitic resistance of the inductor and diode voltage drop.
+
+For now, we can only conclude that the load resistance is somewhere
+between $3 \Omega$ and $6 \Omega$, which is in the range of the 10R 
+variable resistor.
+
+After that, interest focuses on the inductance $L_1$, $L_2$, and $L_3$.
+This can be found by considering the
+peak-to-peak ripple current $\Delta I_L$.
+
+From theory in Continuous Conduction Mode, $\Delta I_L = \frac{V_d D(1-D)}{f_s L}$, 
+where $f_s$ is the switching frequency, 100kHz, D is the
+duty ratio, fixed at 0.53, and $V_D$ is 30V. 
+Rearranging gives
+$L = \frac{V_d D(1-D)}{f_s \Delta I_L}$.
+By looking at the waveform of inductor current, we can see that
+the buck converter operates at CCM for the first two cases in 
+Figure \ref{fig:2-3}. $\Delta I_L$ is found to be 3.0047A for the
+case with $L_3$ ON, and 6.5728A for the case with $L_3$ and $L_2$ ON.
+
+$L_3 = \frac{30 \times 0.53 \times (1-0.53)}{100000 \times 3.0047} = 24.9 \mu H$
+
+$L_2 // L_3 = \frac{30 \times 0.53 \times (1-0.53)}{100000 \times 6.5728} = 11.4 \mu H$
+
+We can get $L_2 = 21.0 \mu H$.
+
+For the last case in Figure \ref{fig:2-3}, the buck converter now operates in DCM.
+Thus, the previous formula is not applicable. However, we can still find 
+$K = \frac{2L}{RT_s}$ by the relation of voltage transfer ratio in DCM:
+\begin{equation*}
+    M(D,K) = \frac{V_o}{V_d} = \frac{2}{1+\sqrt{1+\frac{4K}{D^2}}}
+\end{equation*}
+Rearranging gives $K = \frac{D^2(1-M)}{M^2}$. With D = 0.53, 
+$M = \frac{V_o}{V_d} = \frac{17.471}{30} = 0.58$, K = 0.351.
+Thus, $L_1 // L_2 // L_3 = \frac{K R }{2f_s} = 5.27 \mu H$.
+
+We can get $L_1 = 18.4 \mu H$.
+
+Lastly, in session 2-4, duty ratio is adjusted under DCM to see its 
+effect on voltage transfer ratio. The readings are shown in Figure \ref{fig:2-4}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{Figure2-4.jpg}
+    \caption{Scope reading of section 2-4}
+    \label{fig:2-4}
+\end{figure}
+
+For $M = \frac{V_o}{V_d} = 0.5$, $D = \sqrt{\frac{KM^2}{1-M}} = 0.418$.
+In the reading, we have D = 0.43, which is quite close to the theoretical value.
+
+\newpage
+\section*{Exercise 3: DC-DC Boost Converter}
+In this Exercise, every testing schematic is the same as shown in Exercise 2,
+except that the buck converter is replaced by a boost converter. The 
+testing schematic of the DC-DC Boost Converter is shown by Figure \ref{fig:boost}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width = 1\linewidth]{Boost.jpg}
+    \caption{Schematic of DC-DC Boost Converter}
+    \label{fig:boost}
+\end{figure}
+ 
+
+The measurements are carried by four channels of
+the oscilliscope.
+\begin{enumerate}
+    \item CH1: Gate pulse voltage $v_G$
+    \item CH2: MOSFET voltage $v_S$
+    \item CH3: Output DC voltage $V_o$
+    \item CH4: Inductor current $i_L$
+\end{enumerate}
+
+\begin{figure}[htbp] 
+    \centering 
+    \begin{subfigure}[t]{0.4\textwidth} % 子图宽度可适度扩大
+        \centering
+        \includegraphics[width=\linewidth]{Figure3-2-1.jpg} 
+        \caption{Reading with $V_o$ = 25V}
+        \label{fig:3-2-1}
+    \end{subfigure}
+    \hspace{2cm}
+    \begin{subfigure}[t]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure3-2-2.jpg}
+        \caption{Reading with $V_o$ = 35V}
+        \label{fig:3-2-2}
+    \end{subfigure}
+    \caption{Scope readings of section 3-2}
+    \label{fig:3-2}
+\end{figure}
+
+To find the load resistance $R_L = \frac{V_o}{I_o}$, we still
+read $I_o$ from CH4, which measures the inductor current $i_L$.
+Note that from KCL, $i_L = I_o + i_C$, where $i_C$ is the current
+through the output capacitor. 
+
+Under steady state operation of a capacitor, the average current
+through it is zero. Thus, $I_{o} = i_{L\text{avg}}$ still holds.
+For $V_o = 25V$, $I_o = 1.2072A$, and for $V_o = 35V$, $I_o = 1.6153A$,
+as shown in Figure \ref{fig:3-2}.
+We can get $R_L = 21.1 \Omega$ and $22.3 \Omega$ respectively.
+The load resistances are quite close to each other under two operations.
+We can conclude that the load resistance is about $21.6 \Omega$.
+
+\begin{figure}[htbp] 
+    \centering 
+    \begin{subfigure}[t]{0.3\textwidth} % 子图宽度可适度扩大
+        \centering
+        \includegraphics[width=\linewidth]{Figure3-3-1.jpg} 
+        \caption{Reading with $L_3$ ON}
+        \label{fig:3-3-1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure3-3-2.jpg}
+        \caption{Reading with $L_3$ and $L_2$ ON}
+        \label{fig:3-3-2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[t]{0.3\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure3-3-3.jpg}
+        \caption{Reading with $L_3$, $L_2$, and $L_1$ ON}
+        \label{fig:3-3-3}
+    \end{subfigure}
+    \caption{Scope readings of section 3-3}
+    \label{fig:3-3}
+\end{figure}
+
+The inductor current waveforms under different settings of
+value of inductance are Shown by Figure \ref{fig:3-3}. 
+As in Exercise 2, we can find the inductance values by measuring
+the peak-to-peak ripple current $\Delta I_L$ after specifying 
+whether the converter operates in CCM or DCM.
+
+From Figure \ref{fig:3-3-1} and \ref{fig:3-3-2}, we have CCM operation.
+With only $L_3$ ON, $\Delta I_L$ is found to be 0.824A 
+While $L_3$ and $L_2$ are ON, $\Delta I_L$ is 1.732A. The duty 
+ratio is set to be 0.43 in this session. 
+
+From $L = \frac{V_d D(1-D)}{f_s \Delta I_L}$,
+we can find that $L_3 = 44.6 \mu H$, and $L_2 // L_3 = 21.2 \mu H$.
+Thus, $L_2 = 40.4 \mu H$.
+For the last case in Figure \ref{fig:3-3-3}, the boost converter now operates in DCM.
+As in a boost converter under DCM, the voltage transfer ratio is given by:
+\begin{equation*}
+    M(D,K) = \frac{V_o}{V_d} = \frac{1 + \sqrt{1+\frac{4D^2}{K}}}{2}
+\end{equation*}
+By rearranging, we have $ K = \frac{D^2}{M(M-1)}$. With D = 0.43, M = 27.9/15 = 1.86,
+K = 0.116.
+Thus, $L_1 // L_2 // L_3 = \frac{KR}{2f_s} = 12.5 \mu H$.
+$L_1$ is 30.5 $\mu H$.
+
+In the last sesstion, the duty ratio is decreased untill $V_o = 25V$ to 
+validate the theoretical voltage transfer ratio in DCM. The reading is shown
+by Figure \ref{fig:3-4}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width = 0.5\linewidth]{Figure3-4.jpg}
+    \caption{Scope reading of section 3-4}
+    \label{fig:3-4}
+\end{figure}
+
+For $M = \frac{V_o}{V_d} = \frac{25}{15} = 1.67$, and 
+the duty ratio is measured to be 0.35.
+The theoretical value is $D = \sqrt{{K M(M-1)}} = 0.36$,
+which is quite close to the measured value.
+
+
+
+
+
+
+\end{document}

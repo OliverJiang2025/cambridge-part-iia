@@ -1,0 +1,353 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{pdfpages}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\graphicspath{{../Figures/}}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{circuitikz}
+\usepackage{setspace}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{subcaption}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
+\doublespacing{}
+\usepackage{wrapfig}
+\textwidth 15.5cm \oddsidemargin 0cm \topmargin -1cm \textheight
+24cm \footskip 1.5cm \usepackage{epsfig}
+\usepackage{amsmath,graphicx,psfrag,pstcol}
+\usepackage{hyperref}
+\def\n{\noindent}
+\def\u{\underline}
+\def\hs{\hspace}
+\newcommand{\thrfor}{.^{\displaystyle .} .}
+\newcommand{\bvec}[1]{{\bf #1}}
+\usepackage{listings} 
+\usepackage{xcolor}
+
+
+
+\begin{document}
+\includepdf{IIA_Lab_FeedbackSheet_2025.pdf}
+
+\section{Lab Worksheet}
+\subsection{Simplified Aircraft Model}
+Transfer function = $\frac{10}{s^2+10s}$
+\newline
+num = [10], den = [1,10,0]
+\subsection{Modelling Manual Control}
+Controller transfer function = $ke^{-Ds}$
+\newline
+k = 1.56, D = 0.57, Phase margin = {30\degree}
+\newline
+Amount of extra time delay which can be tolerated = 0.338s
+\subsection{Pilot Induced Oscillation}
+Period of oscillation (observed) = 4.44s
+\newline
+Period of oscillation (theoretical) = 4.488s
+\subsection{Sinusoidal Disturbances}
+Maximum stabilising gain = 0.422
+\newline
+Gain at 0.66 Hz = 9dB   
+\newline
+Phase at 0.66 Hz = -240\degree
+\subsection{Unstable Aircraft}
+Fastest pole at T = 0.6s
+\subsection{Autopilot with Proportion Control}
+Proportional gain $K_C$ = 16, Period of oscillation $T_C$ = 2s
+\subsection{Autopilot with PID Control}
+Transfer function of PID controller = $K_P(1+\frac{1}{sT_i}+sT_d)$
+\newline
+PID constants: $K_P$ = 9.6, $T_i$ = 1, $T_d$ = 0.25
+\newline
+Adjusted value of $T_d$ = 0.35
+\subsection{Integrator Wind-up}
+Integrator bound Q = 0.2
+\newpage
+\section{Lab Report}
+\subsection{(§2.2 Modelling Manual Control) Nyquist diagram (from Bode diagram) for
+controller in series with plant.}
+From Figure \ref{fig:fig2}, in which the upper graph is the magnitude plot 
+while the lower graph is the phase plot. Information contained in this 
+two plot are combined to give the shape of Nyquist Diagram of $K(j\omega)G(j\omega)$,
+which is given in Figure \ref{fig:nyq}.
+
+\begin{wrapfigure}{r}{0.4\textwidth} 
+    \centering
+    \includegraphics[width=\linewidth, keepaspectratio]{NyqDia.png}
+    \caption{Step response of manual control}
+    \label{fig:nyq}
+  \end{wrapfigure}
+  
+It is clear that the Nyquist Diagram behaves in a spiral shape 
+approaching the origin point of the Argand Diagram. 
+It is due to $e^{-j\omega D}$ term which rises an exponential decay of 
+magnitude while keeping the curve "rotating" as 
+$\omega \to \infty$.
+Besides, it is worth noting that the Nyquist diagram does not encircle $(-1,j0)$ 
+according to the magnitude plot in Figure \ref{fig:fig2}. 
+By Nyquist Stability Criteria, this closed loop system is stable.
+
+
+\subsubsection{(§2.2 Modelling Manual Control) Are you using any integral action? Give a brief
+explanation. What does this imply about the accuracy of the model of the human
+controller?}
+As shown by Figure \ref{fig:fig3}, it is clear that an integral action was used. 
+Starting from around 4.7s, the orange $u(t)$ curve, which represents the manual 
+control signal, maintains at around 5 to attempting to stabilize $e(t)$ to 0. 
+This is an integral control because both the $e(t)$ and $\frac{de(t)}{dt}$ 
+are zero afterwards. $u(t) = k_i \int^t_0 e(s)ds$ for some $k_i$ here.
+
+
+\subsection{(§2.3 Pilot Induced Oscillation) Explain the oscillation of the feedback loop. How
+does your observed period of oscillation compare to the theoretical prediction?}
+Due to the poorly designed controller, there is a large phase lag at a certain
+frequency. When the phase lag reaches $-\frac{\pi}{2}$, the closed loop becomes
+marginally stable, and oscillations occur.
+This frequency at which the aircraft oscillates can be found by looking at the
+Bode plot in Figure \ref{fig:fig6}. It is clear that when the frequency is around
+1.4 rad/s, the phase lag reaches $-\frac{\pi}{2}$ and the magnitude is around 0dB.
+From this, the theoretical period of oscillation can be calculated as: 
+$T = \frac{2\pi}{\omega} = \frac{2\pi}{1.4} = 4.488s$.
+\newline
+The observed period of oscillation from the simulation is 4.44s, which is very close to
+the theoretical prediction of 4.488s.
+
+
+\subsection{(§2.3 Pilot Induced Oscillation) Can you give a rough guideline to the control
+designer to make PIO less likely?}
+For designers to make PIO less likely, they should make sure the phase margin
+is sufficiently large at the frequency which gives the magniude to be 0dB.
+According to relevant literatures\cite{flyquality}, the average
+phase gradient is more important to avoid PIO than the phase margin itself.
+This gradient must be small to allow the pilot to react to the oscillations.
+
+
+
+
+\subsection{(§2.4 Sinusoidal Disturbances) Was your manual input able to reduce the error
+(as compared to providing no input)?}
+It is very hard to keep the aircraft stable with or without manual control. By comparing
+Figure \ref{fig:fig8} and Figure \ref{fig:fig10}, it is clear that the error $e(t)$ barely
+reduced by manual control, even under manual control with a small movement.
+
+
+\subsection{(§2.5 An Unstable Aircraft) Nyquist diagram for G2(s).}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{nyqdia2.png}
+    \caption{Nyquist diagram for G2(s)}
+    \label{fig:nyqdia2}
+\end{figure}
+
+
+
+\subsection{(§2.5 An Unstable Aircraft) Explain, using the Nyquist criterion, why the 
+feedback system is stable with a proportional gain greater than 0.5.}
+For a system with proportional gain $K$, the Nyquist stability criterion states that
+the closed-loop system is stable if the Nyquist plot of $G(s)$ does not encircle
+$(-\frac{1}{K}, j0)$. From Figure \ref{fig:nyqdia2}, it is clear that when $K > 0.5$,
+the system is stable as the plot intersect the negative real axis at (2,0).
+
+
+
+
+
+\subsection{(§2.5 An Unstable Aircraft) Sketch of a Nyquist diagram for G2(s). with a small
+time delay D.}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{nyqdia3.png}
+    \caption{Nyquist diagram for G2(s) with time delay D}
+    \label{fig:nyqdia3}
+\end{figure}
+
+\subsection{(§3.4 Integrator Wind-up) Explain how you calculated the bound on Q.}
+The time domain expression of the PID controller is:
+\begin{equation*}
+    u(t) = K_P \left( e(t) + \frac{1}{T_i} \int_0^t e(\tau) d\tau + T_d \frac{de(t)}{dt} \right)
+\end{equation*}
+And the bound Q is defined to be the maximum value of $\int_0^t e(\tau) d\tau$.
+We can see that at steady state, $e(t) = 0$ and $\frac{de(t)}{dt} = 0$, so the only term
+that contributes to $u(t)$ is the integral term. Therefore, we have:
+$u(t) = \frac{k_P}{T_i} \int_0^t e(\tau) d\tau$, and Q = $\frac{T_i}{K_P} u_{max} \approx 0.2$.
+
+
+\newpage
+\appendix
+\section{Link to Jupyter Notebook}
+This \href{https://github.com/OliverJiang2025/3F1_Lab_Flight_Control.git}{link} goes to the worked Jupyter Notebook finished on the lab session.
+
+\section{Figures from Lab Session}
+
+\begin{figure}[h]
+    \centering
+    % 第1行：Figure1-3.png
+    \begin{subfigure}[b]{0.28\textwidth}  % 缩小子图宽度，预留间距
+        \centering
+        \includegraphics[width=\linewidth]{Figure1.png}  % 带.png后缀
+        \caption{Supplementary Figure 1}
+        \label{fig:fig1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure2.png}
+        \caption{Supplementary Figure 2}
+        \label{fig:fig2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure3.png}
+        \caption{Supplementary Figure 3}
+        \label{fig:fig3}
+    \end{subfigure}
+
+    % 第2行：Figure4-6.png
+    \vspace{0.3cm}  % 紧凑垂直间距
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure4.png}
+        \caption{Supplementary Figure 4}
+        \label{fig:fig4}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure5.png}
+        \caption{Supplementary Figure 5}
+        \label{fig:fig5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure6.png}
+        \caption{Supplementary Figure 6}
+        \label{fig:fig6}
+    \end{subfigure}
+
+    % 第3行：Figure7-8.png + 空占位
+    \vspace{0.3cm}
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure7.png}
+        \caption{Supplementary Figure 7}
+        \label{fig:fig7}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure8.png}
+        \caption{Supplementary Figure 8}
+        \label{fig:fig8}
+    \end{subfigure}
+    \hfill
+    % 空占位（保持3列结构整齐）
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \mbox{}  % 空内容，不影响排版
+    \end{subfigure}
+
+    \caption{Supplementary figures 1--8 (continued on next page).}
+    \label{fig:app-page1}
+\end{figure}
+
+% ---------------------- 第2页：7张图（Figure9-15.png） ----------------------
+\begin{figure}[h]
+    \centering
+    % 第1行：Figure9-11.png
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure9.png}
+        \caption{Supplementary Figure 9}
+        \label{fig:fig9}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure10.png}
+        \caption{Supplementary Figure 10}
+        \label{fig:fig10}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure11.png}
+        \caption{Supplementary Figure 11}
+        \label{fig:fig11}
+    \end{subfigure}
+
+    % 第2行：Figure12-14.png
+    \vspace{0.3cm}
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure12.png}
+        \caption{Supplementary Figure 12}
+        \label{fig:fig12}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure13.png}
+        \caption{Supplementary Figure 13}
+        \label{fig:fig13}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure14.png}
+        \caption{Supplementary Figure 14}
+        \label{fig:fig14}
+    \end{subfigure}
+
+    % 第3行：Figure15.png（居中，避免单独一列溢出）
+    \vspace{0.3cm}
+    \begin{subfigure}[b]{0.28\textwidth}  % 与其他子图宽度一致
+        \centering
+        \includegraphics[width=\linewidth]{Figure15.png}
+        \caption{Supplementary Figure 15}
+        \label{fig:fig15}
+    \end{subfigure}
+    % 左右空占位，让第15张图居中
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \mbox{}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.28\textwidth}
+        \centering
+        \mbox{}
+    \end{subfigure}
+
+    \caption{Supplementary figures 9--15 (continued from previous page).}
+    \label{fig:app-page2}
+\end{figure}
+
+
+
+
+\newpage
+\begin{thebibliography}{99}
+
+    \bibitem{cued} EIETL, CUED.
+    \newblock \textit{3F1 Flight Control Lab Guide}.
+    \bibitem{flyquality} 
+    U.S. Department of Defense.
+    \newblock \textit{Flying Qualities of Piloted Aircraft}.
+    \newblock MIL-STD-1797A.
+    \newblock Department of Defense, Washington, D.C., Jan 1990.
+    \newblock (Military Standard).
+
+
+\end{thebibliography}
+
+\vspace*{1cm}
+
+
+
+\end{document}
+
