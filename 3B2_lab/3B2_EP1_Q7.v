@@ -2,7 +2,8 @@ module lock (
     input clk,
     input rst,
     input wire [1:0] s,
-    output reg [1:0] Q
+    output reg [1:0] Q,
+    output reg [1:0] lock
 );
     wire Sx, Rx, Sy, Ry;
 
