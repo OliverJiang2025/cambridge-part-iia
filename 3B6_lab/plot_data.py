@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-
+from scipy.optimize import curve_fit
 # resistance in TIR used to read current
 R = 20
 
@@ -55,7 +55,7 @@ def plot_fit():
     axs[1].set_title('Voltage - Current plot with linear fit')
     axs[1].set_xlabel('Current (mA)')
     axs[1].set_ylabel('Voltage (V)')
-    axs[1].text(10,2.85,f'Plot 2: k = {k2:.3f}, b = {b2:.3f}')
+    axs[1].text(10,2.85,f'Plot 2: 1000k = {k2*1000:.3f}, b = {b2:.3f}')
     
     plt.legend()
     plt.show()

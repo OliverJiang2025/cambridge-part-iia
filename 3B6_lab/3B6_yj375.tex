@@ -54,7 +54,7 @@ the circuits used in the experiment. The raw data will be available in appendix.
     \label{fig:cctdiagram}
 \end{figure}
 
-\subsection{L-I Curve Analysis}
+\subsection{Laser Theory}
 According to laser theory, photon emission becomes stimulated
 when the gain exceeds the losses in the laser cavity. This could 
 be observed in the light-current (L-I) characteristics of a laser, where
@@ -62,12 +62,162 @@ the output power increases significantly once the threshold current is reached.
 The expectation of the L-I curve is that it will show a linear increase in output power
 after the threshold current, with a steep slope indicating efficient lasing action.
 
-As given in the lab handout, this threshold current is between 40 and 55 mA.
+As given in the lab handout, this threshold current is between 40 and 55 mA, 
+while the actual threshold current observed from the raw data is around 75 mA. 
+This could be reasonable, because the operation of laser diode
+is very temperature sensitive. The threshold current can increase significantly 
+with temperature.
+
+\subsection{Data Analysis}
+As shown in Figure \ref{fig:plot}, the plot of the raw data
+of L-I curve shows a clear 
+threshold behavior. 
+Below the threshold current, the light output is negligible. This is because the 
+gain is not sufficient to overcome the losses in the cavity. 
+the laser is not lasing, and only spontaneous emission occurs.
+Above the threshold current, the output power increases rapidly, indicating that
+the laser is lasing and the gain exceeds the losses. 
+The large slope of the L-I curve above the threshold can provide 
+insights into the efficiency of the laser, 
+with a steeper slope indicating higher efficiency in 
+converting electrons to photons.
+
 \begin{figure}[h]
     \centering
-    \includegraphics[width=1.0\textwidth]{Figure_1.png}
+    \includegraphics[width=0.8\textwidth]{Figure_1.png}
     \caption{Plot and linear fit of raw data}
     \label{fig:plot}
+\end{figure}
+
+While the other plot shows relation of voltage across the laser diode and
+the current through the laser diode. The V-I relation can be derived 
+from the equivalent circuit of the laser diode, as shown in Figure \ref{fig:eqcct}.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1.0\textwidth]{Equivalent_circuit.png}
+    \caption{Equivalent Circuit of Laser Diode}
+    \label{fig:eqcct}
+\end{figure}
+
+There is a non-negligible stray series resistance in the laser diode,
+which contributes to the increase in voltage across the laser diode as the current increases.
+
+The relation could be expressed as:
+\begin{equation*}
+    V = V_{th} + I \cdot R_s
+\end{equation*}
+
+Where V and I are the voltage across the laser diode and the current through the laser diode,
+respectively. $V_{th}$ is the threshold voltage, and $R_s$ is the stray series resistance.
+
+By the linear fit of the V-I curve, 
+we can determine the threshold voltage and the stray series resistance.
+$V_{th} \approx 1.262 V$, and $R_s \approx 21.505 \Omega$.
+
+From the circuit diagram given, the stray series resistance is 26 $\Omega$,
+which is close to the value obtained from the linear fit, with an error of 
+$17.3\%$. This error could be attributed to the measurement errors, 
+and the non-ideal behavior of the laser diode.
+
+With the threshold value of perfect diode, we could estimate the lasing
+wavelength of the laser diode $\lambda_0$ by the following equation:
+
+\begin{equation*}
+    \lambda_0 = \frac{hc}{eV_{th}}
+\end{equation*}
+
+The value of wavelength is 983.12nm, which is within infrared range.
+This calculation agrees to the observation during the lab, there was
+no visible light emitted from the laser diode. 
+
+
+
+\subsection{Error Analysis}
+
+
+
+
+
+
+\section{Part II: Measurement of laser output spectrum}
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_view.jpg} 
+        \caption{}
+        \label{fig:sub1}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_centre.jpg} 
+        \caption{}
+        \label{fig:sub2}
+    \end{subfigure}
+    
+    \par\bigskip 
+    
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_ripple.jpg} 
+        \caption{}
+        \label{fig:sub3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_3dBwidth.jpg} 
+        \caption{}
+        \label{fig:sub4}
+    \end{subfigure}
+    
+    \caption{}
+    \label{fig:four_images}
+\end{figure}
+
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_view.jpg} 
+        \caption{}
+        \label{fig:unsub1}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_center.jpg} 
+        \caption{}
+        \label{fig:unsub2}
+    \end{subfigure}
+    
+    \par\bigskip 
+    
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_ripple.jpg} 
+        \caption{}
+        \label{fig:unsub3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_3dBwidth.jpg} 
+        \caption{}
+        \label{fig:nusub4}
+    \end{subfigure}
+    
+    \caption{}
+    \label{fig:unfour_images}
 \end{figure}
 
 
@@ -89,7 +239,23 @@ As given in the lab handout, this threshold current is between 40 and 55 mA.
 
 
 
-\section{Part II: Measurement of laser output spectrum}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{Conclusion}
 
