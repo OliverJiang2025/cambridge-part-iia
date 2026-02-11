@@ -6,7 +6,7 @@ import numpy as np
 R = 20
 
 # read data from excel
-df = pd.read_excel("3B6 data.xlsx")
+df = pd.read_excel("3B6_lab/3B6 data.xlsx")
 #print(df)
 
 # load data
@@ -39,6 +39,7 @@ def linear_fit_2():
 def plot_fit():
     k1, b1, new_intensities, new_currents_1 = linear_fit_1()
     k2, b2, new_voltages, new_currents_2 = linear_fit_2()
+
     fig, axs = plt.subplots(1, 2, figsize = (12,6))
     axs[0].scatter(currents, intensities, color = 'skyblue')
     axs[0].scatter(new_currents_1, new_intensities, color = 'skyblue')
@@ -46,7 +47,7 @@ def plot_fit():
     axs[0].set_title('Intensity - Current plot with linear fit')
     axs[0].set_xlabel('Current (mA)')
     axs[0].set_ylabel('Intensity (mV)')
-    print(f'Plot 1: k = {k1:.3f}, b = {b1:.3f}')
+    axs[0].text(10,400,f'Plot 1: k = {k1:.3f}, b = {b1:.3f}')
 
     axs[1].scatter(currents, voltages, color = 'skyblue')
     axs[1].scatter(new_currents_2, new_voltages, color = 'skyblue')
@@ -54,7 +55,7 @@ def plot_fit():
     axs[1].set_title('Voltage - Current plot with linear fit')
     axs[1].set_xlabel('Current (mA)')
     axs[1].set_ylabel('Voltage (V)')
-    print(f'Plot 2: k = {k2:.3f}, b = {b2:.3f}')
+    axs[1].text(10,2.85,f'Plot 2: k = {k2:.3f}, b = {b2:.3f}')
     
     plt.legend()
     plt.show()
