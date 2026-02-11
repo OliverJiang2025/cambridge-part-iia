@@ -1,8 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1770835479.29724 "e:/Cambridge_Engineering/Part IIA/Cambridge_Engineering_Coursework/3B6_lab/3B6_yj375.tex" "3B6_yj375.pdf" "3B6_yj375" 1770835481.38309 0
-  "3B6_yj375.aux" 1770835481 3408 2e1090e3118111fc0b2f3c69f2b0b639 "pdflatex"
-  "3B6_yj375.out" 1770835481 1258 f167914d5c5a739239bab546d80172bf "pdflatex"
-  "3B6_yj375.tex" 1770835476 7475 52e7423e3db9ff01964e30c53dd7e7a8 ""
+["pdflatex"] 1770847201.41173 "e:/Cambridge_Engineering/Part IIA/Cambridge_Engineering_Coursework/3B6_lab/3B6_yj375.tex" "3B6_yj375.pdf" "3B6_yj375" 1770847203.55032 0
+  "3B6_yj375.aux" 1770847203 4328 7d98af3834e722360401c8635712185a "pdflatex"
+  "3B6_yj375.out" 1770847203 2173 c29989964718734b1f2d768598bd2e71 "pdflatex"
+  "3B6_yj375.tex" 1770847200 10594 f092c53cf5c9533e008879f110c19eb5 ""
   "Circuit_diagram.png" 1770827950 191255 5cfdb79dd277e252f798670d4c1a2701 ""
   "Equivalent_circuit.png" 1770828132 188549 ab2c7d49728a9d3c0c7b959e5268a085 ""
   "Figure_1.png" 1770832888 48985 8654ceff36ef4f406db212e0adb60394 ""
@@ -22,6 +22,7 @@
   "d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1735354005 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1735354005 36281 c355509802a035cadc5f15869451dcee ""
   "d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1735354005 35752 024fb6c41858982481f6968b5fc26508 ""
+  "d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb" 1735354005 31809 8670ca339bf94e56da1fc21c80635e2a ""
   "d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1735354005 32762 7fee39e011c23b3589931effd97b9702 ""
   "d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1735354005 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
   "d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1735354005 32569 5e5ddc8df908dea60932f3c484a54c0d ""
@@ -198,8 +199,9 @@
   "d:/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1735364177 5531417 0a89c760151e024fa577412803c80da5 ""
   "d:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1735364328 3347727 91057d0bf701461324dbee820a349449 ""
   "d:/texlive/2024/texmf.cnf" 1735364163 713 e69b156964470283e0530f5060668171 ""
-  "e:/Cambridge_Engineering/Part IIA/Cambridge_Engineering_Coursework/3B6_lab/3B6_yj375.tex" 1770835476 7475 52e7423e3db9ff01964e30c53dd7e7a8 ""
+  "e:/Cambridge_Engineering/Part IIA/Cambridge_Engineering_Coursework/3B6_lab/3B6_yj375.tex" 1770847200 10594 f092c53cf5c9533e008879f110c19eb5 ""
   "rawdata.png" 1770828478 74774 3cb1cfb5c316a9decaa4e70612f6e320 ""
+  "spec_data.png" 1770846436 6694 4e86bf85a2de1d08d41d626743c09d63 ""
   "stimulated_3dBwidth.jpg" 1770397604 177297 781193a1e1e56e0d5859dec3ab4c94b7 ""
   "stimulated_centre.jpg" 1770397604 188424 bef1cc49bacb256578214c047db1ae64 ""
   "stimulated_ripple.jpg" 1770397604 188516 dc09d244f855f7e41f4ab75b3f8c8576 ""

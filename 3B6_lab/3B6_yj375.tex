@@ -129,7 +129,7 @@ wavelength of the laser diode $\lambda_0$ by the following equation:
 \end{equation*}
 
 The value of wavelength is 983.12nm, which is within infrared range.
-This calculation agrees to the observation during the lab, there was
+This calculation agrees to the observation during the lab. There was
 no visible light emitted from the laser diode. 
 
 
@@ -142,107 +142,83 @@ no visible light emitted from the laser diode.
 
 
 \section{Part II: Measurement of laser output spectrum}
+In thie part, the output spectrum of the laser diode 
+is measured using an optical spectrum analyzer. Data is collected
+for both stimulated and under-stimulated conditions, 
+and the results are analyzed to understand the spectral 
+characteristics of the laser output.
 
+\subsection{Effective Refraction Index of the Semiconductor Material}
+Within the cavity of the laser, the light forms a standing wave,
+with a wavelength $\lambda_g = \frac{\lambda}{n}$. 
+Where $\lambda$ is the wavelength of the light in vacuum, 
+and $n$ is the effective refraction index of the semiconductor material.
+This wavelength should satisfy the resonance condition of the cavity, which is given by:
+\begin{equation*}
+    m  \frac{\lambda_g}{2} = L
+\end{equation*}
+Where m is an integer representing the mode number, and L is the length of the cavity. 
+By rearranging the equation, we can express the wavelength in vacuum as:
+\begin{equation*}
+    \lambda = \frac{2nL}{m} \to f = \frac{mc}{2nL}
+\end{equation*}
 
+The change in frequency is:
+\begin{equation*}
+    \delta f = \frac{c}{2nL}
+\end{equation*}
 
-\begin{figure}[htbp]
+From $f = \frac{c}{\lambda}$, $\delta f = \frac{c}{\lambda^2} \delta \lambda$, 
+we can derive the change in wavelength as:
+\begin{equation*}
+    \delta \lambda = \frac{\lambda^2}{2nL}
+\end{equation*}
+
+Thus, the effective refraction index can be calculated as:
+\begin{equation*}
+    n = \frac{\lambda^2}{2L \Delta \lambda}
+\end{equation*}
+
+\subsection{Measurement of Laser Output Spectrum}
+The observed output spectrum of the laser diode
+shows multiple peaks, which correspond to different longitudinal modes of the laser cavity.
+Figure \ref{fig:four_images} and Figure \ref{fig:unfour_images} in the appendix
+show the output spectrum under stimulated and under-stimulated conditions, 
+respectively. The collected data is shown in Figure \ref{fig:specdata}.
+\begin{figure}[h]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{stimulated_view.jpg} 
-        \caption{}
-        \label{fig:sub1}
-    \end{subfigure}
-    \hfill 
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{stimulated_centre.jpg} 
-        \caption{}
-        \label{fig:sub2}
-    \end{subfigure}
-    
-    \par\bigskip 
-    
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{stimulated_ripple.jpg} 
-        \caption{}
-        \label{fig:sub3}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{stimulated_3dBwidth.jpg} 
-        \caption{}
-        \label{fig:sub4}
-    \end{subfigure}
-    
-    \caption{}
-    \label{fig:four_images}
+    \includegraphics[width=1.0\textwidth]{spec_data.png}
+    \caption{Spectrum Data}
+    \label{fig:specdata}
 \end{figure}
 
 
+\subsection{Discussion and Analysis}
+By comparing the two sets of data, it is clear that 
+the only discrepancy is the 3dB width of the spectrum. 
+The 3dB width of the spectrum under stimulated condition is narrower 
+than that under under-stimulated condition. This is 
+expected because the stimulated photon emission 
+leads to a more concentrated spectrum,
+while spontaneous emission results in a broader spectrum 
+due to the random nature of photon emission.
+
+The center wavelengths of the two spectra are very close, 
+which indicates that the lasing wavelength range is consistent 
+regardless of the stimulation condition.
+
+At last, the ripple width corresponds to $\Delta \lambda$ 
+in the equation for effective refraction index. As the two 
+measurements use the same laser diode, the ripple widths are 
+expected to be the same.
+
+The effective refraction index could be calculated as:
+\begin{equation*}
+    n = \frac{\lambda_{center}^2}{2L \Delta \lambda} = 
+\end{equation*}
 
 
-\begin{figure}[htbp]
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{under_view.jpg} 
-        \caption{}
-        \label{fig:unsub1}
-    \end{subfigure}
-    \hfill 
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{under_center.jpg} 
-        \caption{}
-        \label{fig:unsub2}
-    \end{subfigure}
-    
-    \par\bigskip 
-    
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{under_ripple.jpg} 
-        \caption{}
-        \label{fig:unsub3}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[b]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{under_3dBwidth.jpg} 
-        \caption{}
-        \label{fig:nusub4}
-    \end{subfigure}
-    
-    \caption{}
-    \label{fig:unfour_images}
-\end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\subsection{Error Analysis}
 
 
 
@@ -268,6 +244,82 @@ no visible light emitted from the laser diode.
     \label{fig:rawdata}
 \end{figure}
 
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_view.jpg} 
+        \caption{}
+        \label{fig:sub1}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_centre.jpg} 
+        \caption{}
+        \label{fig:sub2}
+    \end{subfigure}
+    
+    \par\bigskip 
+    
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_ripple.jpg} 
+        \caption{}
+        \label{fig:sub3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{stimulated_3dBwidth.jpg} 
+        \caption{}
+        \label{fig:sub4}
+    \end{subfigure}
+    
+    \caption{Stimulated Output Spectrum of the Laser Diode}
+    \label{fig:four_images}
+\end{figure}
+
+
+
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_view.jpg} 
+        \caption{}
+        \label{fig:unsub1}
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_center.jpg} 
+        \caption{}
+        \label{fig:unsub2}
+    \end{subfigure}
+    
+    \par\bigskip 
+    
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_ripple.jpg} 
+        \caption{}
+        \label{fig:unsub3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{under_3dBwidth.jpg} 
+        \caption{}
+        \label{fig:nusub4}
+    \end{subfigure}
+    
+    \caption{Under Stimulated Output Spectrum of the Laser Diode}
+    \label{fig:unfour_images}
+\end{figure}
 
 \end{document}
 

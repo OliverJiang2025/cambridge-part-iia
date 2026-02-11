@@ -375,6 +375,16 @@ INPUT d:/texlive/2024/texmf-dist/tex/latex/amsfonts/umsb.fd
 INPUT d:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT d:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT d:/texlive/2024/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
+INPUT ./spec_data.png
+INPUT ./spec_data.png
+INPUT ./spec_data.png
+INPUT ./spec_data.png
+INPUT ./spec_data.png
+INPUT ./rawdata.png
+INPUT ./rawdata.png
+INPUT ./rawdata.png
+INPUT ./rawdata.png
+INPUT ./rawdata.png
 INPUT ./stimulated_view.jpg
 INPUT ./stimulated_view.jpg
 INPUT ./stimulated_view.jpg
@@ -416,11 +426,6 @@ INPUT ./under_3dBwidth.jpg
 INPUT ./under_3dBwidth.jpg
 INPUT ./under_3dBwidth.jpg
 INPUT ./under_3dBwidth.jpg
-INPUT ./rawdata.png
-INPUT ./rawdata.png
-INPUT ./rawdata.png
-INPUT ./rawdata.png
-INPUT ./rawdata.png
 INPUT 3B6_yj375.aux
 INPUT ./3B6_yj375.out
 INPUT ./3B6_yj375.out
@@ -428,6 +433,7 @@ INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
+INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb
 INPUT d:/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
