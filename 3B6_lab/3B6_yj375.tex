@@ -102,7 +102,8 @@ from the equivalent circuit of the laser diode, as shown in Figure \ref{fig:eqcc
 \end{figure}
 
 There is a non-negligible stray series resistance in the laser diode,
-which contributes to the increase in voltage across the laser diode as the current increases.
+which contributes to the linear
+increase in voltage across the laser diode as the current increases.
 
 The relation could be expressed as:
 \begin{equation*}
@@ -114,7 +115,8 @@ respectively. $V_{th}$ is the threshold voltage, and $R_s$ is the stray series r
 
 By the linear fit of the V-I curve, 
 we can determine the threshold voltage and the stray series resistance.
-$V_{th} \approx 1.262 V$, and $R_s \approx 21.505 \Omega$.
+$V_{th} \approx 1.28 V$, and $R_s \approx 21.145 \Omega$, whose error analysis 
+will be carried out later.
 
 From the circuit diagram given, the stray series resistance is 26 $\Omega$,
 which is close to the value obtained from the linear fit, with an error of 
@@ -128,7 +130,7 @@ wavelength of the laser diode $\lambda_0$ by the following equation:
     \lambda_0 = \frac{hc}{eV_{th}}
 \end{equation*}
 
-The value of wavelength is 983.12nm, which is within infrared range.
+The value of wavelength is 968.39nm, which is within infrared range.
 This calculation agrees to the observation during the lab. There was
 no visible light emitted from the laser diode. 
 
@@ -136,9 +138,40 @@ no visible light emitted from the laser diode.
 
 \subsection{Error Analysis}
 
+To carry out error analysis on gradient of intercept of a linear fit,
+a built-in module in python, \texttt{scipy.odr}, is utilized. 
+The measurement is modelled to have a $3\%$ system error and corresponding 
+random error caused by human reading. The total error is assumed to be
+geometric mean of the two error sources. 
 
+The linear fit with error bar is shown in Figure \ref{fig:VI}.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{VI_fit.png}
+    \caption{V-I linear fit with error analysis}
+    \label{fig:VI}
+\end{figure}
 
+The stary resistance is $1000 \times \text{gradient}$, with value of 
+21.145 $\Omega$, and an error of $\pm 0.3861 \Omega$. It is obvious that
+the real value of the stray resistance is not with in the error range of this 
+linear fit. There might be other non-ideal imperfections that affected the 
+measurement. For example, it could be effect of temperature or extra parasitic effect
+in the circuit.
+
+The intercept corresponds to the threshold voltage of the laser diode. It 
+has a value of 1.2812V with error of $\pm0.0221$V,
+or a percentage error of $\pm1.72\%$. This error would propagate
+to the calculation of wavelength of light emitted.
+
+The wavelength is calculated by $\lambda_0 = \frac{hc}{eV_{th}}$, in 
+which $h$, $c$, $e$ are all constants. The only source of error 
+comes from $V_{th}$, which gives a percentage error of $\pm1.72\%$.
+This is an absolute error of $\pm16.66$nm.
+
+Thus, the stray resistance is measured to be $21.145 \pm 0.3861 \Omega$.
+The wavelength of light emitted is measured to be $968.39 \pm 16.66$nm.
 
 
 \section{Part II: Measurement of laser output spectrum}
@@ -214,26 +247,75 @@ expected to be the same.
 
 The effective refraction index could be calculated as:
 \begin{equation*}
-    n = \frac{\lambda_{center}^2}{2L \Delta \lambda} = 
+    n = \frac{\lambda_{center}^2}{2L \Delta \lambda} = 3.351
 \end{equation*}
-
+by taking $L = 300 \mu m$. This value of refractive index is 
+within the typical range of semiconductor.
 
 \subsection{Error Analysis}
 
+The calculation of refractive index has two sources of error:
+$\Delta \lambda$ and $\lambda_{center}^2$. Thus, the error of refractive 
+index should include both sources:
+\begin{equation*}
+    U_n = \sqrt{(\frac{\partial n}{\partial \Delta \lambda}U_{\Delta \lambda})^2
+            + (\frac{\partial n}{\partial \lambda_{center}^2}U_{\lambda_{center}^2})^2}
+\end{equation*}
+in which $U_x$ is the absolute error of measurement on $x$.
 
+For each reading of wavelength from the spectrum analyzer, there is a
+random error of $U_0$ = 0.00005$\mu$m = 0.05nm. 
 
+By measuring $\Delta \lambda$, two readings were taken to measure width of 
+15 ripples. The error is diluted by a factor of 15:
+$U_{\Delta \lambda} = \frac{2U_0}{15} = 6.67$pm.
 
+The percentage error of $\lambda_{center}^2$ should be twice the percentage 
+error of $\lambda_{center}$. $\%U_{\lambda_{center}} = \frac{0.05\text{nm}}{1.5565\mu\text{m}}$
+= 3.2\text{ppm}.
+The absolute error of $\lambda_{center}^2$ is then 
+$(1.5565\mu m)^2 \times 2 \times 3.2 \text{ppm} = 1.55 \times 10^{-17}$m.
 
+The partial differentials are found by:
+\begin{equation*}
+    \frac{\partial n}{\partial \Delta \lambda} = 
+    -\frac{\lambda_{center}^2}{2L (\Delta \lambda)^2} = -2.78 \times 10^{9}m,
+    \frac{\partial n}{\partial \lambda_{center}^2} =
+    \frac{1}{2L \Delta \lambda} = 1.38 \times 10^{12}m
+\end{equation*}
 
+The total error of refractive index is:
+\begin{equation*}
+    U_n = \sqrt{(2.78 \times 10^9 \times 6.67 \times 10^{-12})^2+
+                (1.38 \times 10^{12} \times 1.55 \times 10^{-17})^2}
+                = 0.0185
+\end{equation*}
 
-
-
-
-
-
+Thus, the measured value of refractive index is $3.351\pm0.0185$.
 
 
 \section{Conclusion}
+
+In this experiment, the electro-optical characteristics of a 
+laser diode were successfully characterized. 
+The Light-Current (L-I) analysis confirmed the transition 
+from spontaneous to stimulated emission. 
+Through linear regression of the V-I characteristics, 
+the threshold voltage and the stray series resistance 
+are determined. 
+Based on the threshold voltage, 
+the bandgap emission wavelength was estimated, 
+confirming operation in the infrared region.
+
+Spectral analysis demonstrated the difference of 
+3dB bandwidth under stimulated conditions compared to spontaneous emission. 
+By analyzing the longitudinal mode spacing, 
+the effective refractive index of the semiconductor material was 
+calculated. 
+
+Overall, the experimental results align well with theoretical 
+expectations for semiconductor laser diodes, 
+accounting for temperature sensitivity and parasitic circuit effects.
 
 \section{Appendix}
 
