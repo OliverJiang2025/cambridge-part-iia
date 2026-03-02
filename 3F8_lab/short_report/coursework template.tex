@@ -1,5 +1,3 @@
-%% LyX 2.2.4 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
 \documentclass[english]{article}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
@@ -9,11 +7,11 @@
 \usepackage{textcomp}
 \usepackage{amstext}
 \usepackage{graphicx}
-
+\usepackage{amsmath}
+\graphicspath{ {./Figures/} }
 \makeatletter
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
+
 \providecommand{\tabularnewline}{\\}
 
 \makeatother
@@ -24,7 +22,7 @@
 \title{3F8: Inference\\
  Short Lab Report}
 
-\author{Author's Name}
+\author{Yongqing Jiang}
 \maketitle
 \begin{abstract}
 This is the abstract. 
@@ -52,9 +50,13 @@ In this exercise we have to consider the logistic classication model
 given a vector of binary labels $\mathbf{y}$ and a matrix of input
 features $\mathbf{X}$. The gradient of the log-likelihood can be
 writen as
-\[
-\frac{\partial\mathcal{L}(\beta)}{\partial\beta}=\text{(to be completed)}\,.
-\]
+\begin{equation*}
+   \frac{\partial\mathcal{L}(\beta)}{\partial\beta}=
+   \sum_{n=1}^{N} (y^{(n)} - \sigma(\beta^T \tilde{x}^{(n)}))\tilde{x}^{(n)}
+   = \tilde{\mathbf{X}} (\mathbf{y} - \sigma(\tilde{\mathbf{X}}\beta ))
+\end{equation*}
+
+
 
 
 \section{Exercise b)}
@@ -88,7 +90,7 @@ we conclude that a linear classifier...
 
 \begin{figure}
 \begin{centering}
-\includegraphics[width=0.3\paperwidth]{place_holder_figure}
+\includegraphics[width=0.3\paperwidth]{fig1.png}
 \par\end{centering}
 \caption{Visualisation of the data.\label{fig:data_visualisation} }
 \end{figure}
@@ -116,7 +118,7 @@ This figure shows that...
 
 \begin{figure}
 \begin{centering}
-\includegraphics[width=0.3\paperwidth]{place_holder_figure}\hspace{1cm}\includegraphics[width=0.3\paperwidth]{place_holder_figure}
+\includegraphics[width=0.3\paperwidth]{fig2.png}\hspace{1cm}\includegraphics[width=0.3\paperwidth]{fig3.png}
 \par\end{centering}
 \caption{Learning curves showing the average log-likelihood on the training
 (left) and test (right) datasets.\label{fig:learning_curves} }
@@ -124,7 +126,7 @@ This figure shows that...
 
 \begin{figure}
 \begin{centering}
-\includegraphics[width=0.3\paperwidth]{place_holder_figure}
+\includegraphics[width=0.3\paperwidth]{fig4.png}
 \par\end{centering}
 \caption{Visualisation of the contours of the class predictive probabilities.\label{fig:data_visualisation-1} }
 \end{figure}
@@ -180,7 +182,7 @@ of the resulting class predictive probabilities on top of the data
 for each choice of $l=\{0.01,0.1,1\}$.
 \begin{figure}
 \begin{centering}
-\includegraphics[width=0.32\textwidth]{place_holder_figure}\hspace{0.15cm}\includegraphics[width=0.32\textwidth]{place_holder_figure}\hspace{0.15cm}\includegraphics[width=0.32\textwidth]{place_holder_figure}
+\includegraphics[width=0.32\textwidth]{fig6.png}\hspace{0.15cm}\includegraphics[width=0.32\textwidth]{fig7.png}\hspace{0.15cm}\includegraphics[width=0.32\textwidth]{fig8.png}
 \par\end{centering}
 \caption{Visualisation of the contours of the class predictive probabilities
 for $l=0.01$ (left), $l=0.1$ (middle), $l=1$ (right).\label{fig:contours_l} }
