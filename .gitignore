@@ -1,0 +1,36 @@
+# LaTeX 中间文件
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.blg
+*.bbl
+*.bcf
+*.run.xml
+
+# Beamer 演示文稿
+*.nav
+*.snm
+*.vrb
+
+# 缓存目录
+.auctex-auto/
+_minted*/
+auto/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Python（如果有代码）
+__pycache__/
+*.pyc
+*.ipynb_checkpoints/
